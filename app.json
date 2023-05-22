@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "01_healthcare",
+    "slug": "01_healthcare"
+  }
+}
