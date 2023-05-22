@@ -4,7 +4,15 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "01_healthcare",
-    "slug": "01_healthcare"
+    "name": "healthcare00",
+    "slug": "healthcare00",
+    "extra": {
+      "eas": {
+        "projectId": "51fb26ec-c010-4463-9d3d-8a77e77da069"
+      }
+    },
+    "android": {
+      "package": "com.vaxad.healthcare00"
+    }
   }
 }
