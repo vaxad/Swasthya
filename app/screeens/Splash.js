@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import React, {useEffect} from 'react';
 
 const Splash = ({navigation}) => {
@@ -9,7 +9,7 @@ const Splash = ({navigation}) => {
   }, []);
   return (
     <View>
-      <Text>Splash</Text>
+      <Image source={require('../../assets/splash.png')}/>
     </View>
   );
 };

@@ -17,7 +17,7 @@ const profile='Profile'
 const asha='Asha'
 
 const Tab = createBottomTabNavigator();
-const BottomNavigator = () => {
+const BottomNavigator = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
     <Tab.Navigator 
@@ -46,7 +46,7 @@ const BottomNavigator = () => {
                     return <Ionicons name={iconName} size={size} color={color}></Ionicons>
                 }})}
                 >
-                    <Tab.Screen name={home} options={{headerShown: false, tabBarLabelStyle:{color:COLORS.primary}}} component={Home}/>
+                    <Tab.Screen name={home} navigation={navigation} options={{headerShown: false, tabBarLabelStyle:{color:COLORS.primary}}} component={Home}/>
                     <Tab.Screen name={doctors} options={{headerShown: false, tabBarLabelStyle:{color:COLORS.primary}}} component={Doctors}/>
                     <Tab.Screen name={rewards} options={{headerShown: false, tabBarLabelStyle:{color:COLORS.primary}}} component={Rewards}/>
                     <Tab.Screen name={asha} options={{headerShown: false, tabBarLabelStyle:{color:COLORS.primary}}} component={Asha}/>

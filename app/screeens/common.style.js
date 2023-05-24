@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
   container: {
     marginTop:SIZES.xLarge,
     marginHorizontal:SIZES.large,
+    paddingHorizontal:SIZES.small,
+    width: "100%",
+  },
+  container2: {
+    paddingTop:SIZES.xxLarge,
+    marginTop:SIZES.xLarge,
+    marginHorizontal:SIZES.small,
     width: "100%",
   },
   userName: {
@@ -44,9 +51,15 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     justifyContent: "center",
+    backgroundColor:"#000000",
+    color:COLORS.lightWhite,
+    width:"80%",
+    borderWidth:3,
     alignItems: "center",
     flexDirection: "row",
+    borderColor:COLORS.primary,
     marginTop: SIZES.large,
+    borderRadius:SIZES.small/1.25,
     height: 50,
   },
   searchWrapper: {
@@ -97,7 +110,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     padding: SIZES.xLarge,
     backgroundColor: COLORS.btn1,
-    borderRadius: SIZES.medium,
+    borderRadius: SIZES.xxLarge,
     justifyContent: "space-between",
     ...SHADOWS.medium,
     shadowColor: COLORS.white,
@@ -145,7 +158,21 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.regular,
     color: "#B3AEC6",
-  }
+  },
+  //
+  btnContainer: {
+    width: 40,
+    height: 40,
+    backgroundColor: COLORS.white,
+    borderRadius: SIZES.small / 1.25,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btnImg: (dimension) => ({
+    width: dimension,
+    height: dimension,
+    borderRadius: SIZES.medium / 2.5,
+  })
 });
 
 export default styles;

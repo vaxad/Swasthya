@@ -1,61 +1,70 @@
-import { View, ScrollView, SafeAreaView, Text } from "react-native";
+import { SafeAreaView } from "react-native";
 import { COLORS, icons, images, SIZES,FONT } from '../constants';
 import ScreenHeaderBtn from '../components/common/header/ScreenHeaderBtn'
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Splash from './screeens/Splash';
-import Doctors from './screeens/Doctors'
-import Asha from './screeens/Asha'
-import Profile from './screeens/Profile'
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BottomNavigator from './screeens/BottomNav';
 import { Stack, useRouter } from "expo-router";
+import SelectProfile from "./profiles/SelectProfile";
+import Splash from './screeens/Splash';
+import RegistrationScreen from "./screeens/Registration";
+import AddRecord from "./screeens/AddRecord";
+import AskName from "./screeens/AskName";
 
 const StackNav = createNativeStackNavigator();
-function Home() {
+function Nav({navigation}) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
-    <BottomNavigator/>
+    <BottomNavigator navigation={navigation}/>
     </SafeAreaView>
   );
 }
 
-function Main() {
+
+function Main({navigation}) {
   return (
     
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
           options={{
-            headerStyle: { backgroundColor: COLORS.lightWhite },
-            headerShadowVisible: false,
-            headerRight: () => {
-                return(
-                <ScreenHeaderBtn iconUrl={require('../assets/icons/qrcode.png')} dimensions="80%" />
-                )
-            },
-            headerLeft: () => {
-                return(
-                <ScreenHeaderBtn iconUrl={require('../assets/images/user.png')} dimensions="100%" />
-                )
-            },
-            headerTitle: "Swasthyá",
-            headerTitleAlign: 'center',
-            headerTitleStyle:{fontFamily: FONT.bold,
-                fontSize: SIZES.xLarge,
-                color: '#FF7927',
-                marginTop: 2,}
+            headerShown: false
         }}
         />
     <NavigationContainer independent={true} >
       <StackNav.Navigator>
+        
         <StackNav.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
+          name="Nav"
+          component={Nav}
+          options={({navigation})=>({
+            headerStyle: { backgroundColor: COLORS.lightWhite },
+            headerShadowVisible: false,
+            headerRight: () => {
+                return(
+                <ScreenHeaderBtn iconUrl={require('../assets/icons/qrcode.png')} dimensions="80%" handlePress={()=>{navigation.navigate('registration')}} />
+                )
+            },
+            headerLeft: () => {
+                return(
+                <ScreenHeaderBtn iconUrl={require('../assets/images/user.png')} dimensions="100%" handlePress={()=>{navigation.navigate('selectProfile')}}/>
+                )
+            },
+            headerTitle: "Swasthyá",
+            headerTransparent:"true",
+            headerTitleAlign: 'center',
+            headerTitleStyle:{
+              fontFamily: FONT.bold,
+                fontSize: SIZES.xLarge,
+                color: '#FF7927',
+                marginTop: 2,
+              }
+              })}
         />
-        <StackNav.Screen name="Profile" component={Doctors} options={{ headerShown: false }}/>
-        <StackNav.Screen name="Settings" component={Profile} options={{ headerShown: false }} />
+        <StackNav.Screen name="selectProfile" component={SelectProfile} options={{ headerShown: false }}/>
+        <StackNav.Screen name="addRecord" component={AddRecord} options={{ headerShown: false }}/>
+        <StackNav.Screen name="askName" component={AskName} options={{ headerShown: false }} />
+        <StackNav.Screen name="registration" component={RegistrationScreen} options={{ headerShown: false }} />
       </StackNav.Navigator>
     </NavigationContainer>
     </SafeAreaView>

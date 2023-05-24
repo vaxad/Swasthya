@@ -4,11 +4,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import styles from '../../../../app/screeens/common.style'
 import { COLORS, icons, images, SIZES } from '../../../../constants';
 
-const CardButton = ({title, description, icon}) => {
+const CardButton = ({title, description, icon, handlePress}) => {
   return (
     
       <View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handlePress} >
           <View >
         
           <Text style={styles.btnTitle}>{title}</Text>
