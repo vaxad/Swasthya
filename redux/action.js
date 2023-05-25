@@ -23,11 +23,13 @@ export const login = (phone) => async (dispatch) => {
 };
 
 export const loadUser = () => async (dispatch) => {
+  //console.log('hii');
   try {
     dispatch({ type: "loadUserRequest" });
-
-    const { data } = await axios.get(`${serverUrl}/me`);
-    dispatch({ type: "loadUserSuccess", payload: data });
+    
+    const res = await axios.get(`${serverUrl}/me`);
+    console.log(res.data);
+    dispatch({ type: "loadUserSuccess", payload: res.data });
   } catch (error) {
     dispatch({ type: "loadUserFailure", payload: error.response.data.message });
   }
@@ -86,14 +88,34 @@ export const deleteTask = (taskId) => async (dispatch) => {
 export const addname = (formData) => async (dispatch) => {
   try {
     dispatch({ type: "updateProfileRequest" });
-    console.log(formData)
-    const { data } = await axios.put(`${serverUrl}/addname`, {
+    //console.log(formData)
+    const res = await axios.put(`${serverUrl}/addname`, formData,{
       headers: {
         "Content-Type": "application/json",
       },
-      data: {
-        "name":{formData}
-      }
+    });
+    //loadUser();
+    dispatch({ type: "updateProfileSuccess", payload: res.data });
+    //console.log(res.data);
+    //console.log('res');
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: "updateProfileFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+export const updateProfile = (formData) => async (dispatch) => {
+  try {
+    dispatch({ type: "updateProfileRequest" });
+
+    const { data } = await axios.put(`${serverUrl}/updateprofile`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     dispatch({ type: "updateProfileSuccess", payload: data.message });
   } catch (error) {

@@ -11,9 +11,13 @@ import Splash from './screeens/Splash';
 import RegistrationScreen from "./screeens/Registration";
 import AddRecord from "./screeens/AddRecord";
 import AskName from "./screeens/AskName";
+import { useDispatch } from "react-redux";
+import { loadUser } from "../redux/action";
+import { useEffect } from "react";
 
 const StackNav = createNativeStackNavigator();
 function Nav({navigation}) {
+  //useDispatch(loadUser);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
     <BottomNavigator navigation={navigation}/>
@@ -23,6 +27,10 @@ function Nav({navigation}) {
 
 
 function Main({navigation}) {
+  const dispatch=useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [])
   return (
     
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>

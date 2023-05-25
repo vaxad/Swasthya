@@ -17,7 +17,7 @@ import {firebaseConfig} from '../../firebaseConfig'
 import firebase from 'firebase/compat/app'
 import { getAuth } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/action';
+import { loadUser, register } from '../../redux/action';
 import { useSelector } from 'react-redux';
 import { context } from '../index';
 
@@ -64,6 +64,8 @@ const RegistrationScreen = ({navigation}) => {
       } catch (e) {
         //console.log(e)
       }
+
+      dispatch(loadUser());
       
       // setCode('')
       // setPhone('');

@@ -16,6 +16,7 @@ import styles from './common.style';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { addname, loadUser } from '../../redux/action';
+import { useEffect } from 'react';
 
 const AskName = ({navigation}) => {
 
@@ -25,12 +26,18 @@ const AskName = ({navigation}) => {
   const [loading, setLoading] = React.useState(false);
   const [name, setName] = useState(null);
   const [data, setData] = useState(null);
+
   
   const add=async (name)=>{
+
     
-    await dispatch(addname(name));
     dispatch(loadUser());
-    console.log(user);
+    const myForm={
+      "name":name
+    }
+    dispatch(addname(myForm));
+    dispatch(loadUser());
+    navigation.navigate("Nav");
   }
 
   const validate = () => {

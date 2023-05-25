@@ -5,9 +5,12 @@ import styles from './common.style'
 import { COLORS, icons, images, SIZES } from '../../constants';
 import CardButton from '../../components/common/cards/button/HomeButton'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { loadUser } from '../../redux/action';
 const Home = () => {
-  const navigation = useNavigation();
 
+  const navigation = useNavigation();
+  const dispatch=useDispatch();
   
 
   return (
@@ -21,7 +24,7 @@ const Home = () => {
       <View style={styles.cardsContainer}>
         <CardButton title="Add Records" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took..." icon={icons.menu} handlePress={()=>{navigation.navigate("addRecord")}}/>
         <CardButton title="View Records" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took..." icon={icons.menu} handlePress={()=>{navigation.navigate("selectProfile")}}/>
-        <CardButton title="Digitize at Home" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took..." icon={icons.menu} handlePress={()=>{navigation.navigate("selectProfile")}}/>
+        <CardButton title="Digitize at Home" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took..." icon={icons.menu} handlePress={()=>{}}/>
         <CardButton title="View History" description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took..." icon={icons.menu} handlePress={()=>{navigation.navigate("selectProfile")}}/>
       </View>
       </ScrollView>

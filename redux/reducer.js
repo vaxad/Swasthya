@@ -44,9 +44,11 @@ export const authReducer = createReducer(
       state.loading = true;
     },
     loadUserSuccess: (state, action) => {
+      console.log('load')
       state.loading = false;
       state.isAuthenticated = true;
-      state.user = action.payload.data.user;
+      state.user = action.payload.user;
+      console.log(action.payload);
     },
     loadUserFailure: (state, action) => {
       state.loading = false;
@@ -92,9 +94,9 @@ export const authReducer = createReducer(
       state.loading = true;
     },
     updateProfileSuccess: (state, action) => {
-      console.log("hii")
+      //console.log(action.payload)
       state.loading = false;
-      state.message = action.payload.data;
+      state.message = action.payload.message;
     },
     updateProfileFailure: (state, action) => {
       state.loading = false;
