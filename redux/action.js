@@ -2,7 +2,6 @@ import axios from "axios";
 
 const serverUrl = "https://swasthyaserver.onrender.com/api/v1";
 
-
 export const login = (phone) => async (dispatch) => {
   try {
     dispatch({ type: "loginRequest" });
@@ -22,28 +21,57 @@ export const login = (phone) => async (dispatch) => {
   }
 };
 
+
+
 export const loadUser = () => async (dispatch) => {
-  //console.log('hii');
+  ////('hii');
   try {
     dispatch({ type: "loadUserRequest" });
     
     const res = await axios.get(`${serverUrl}/me`);
-    console.log(res.data);
+    //(res.data);
     dispatch({ type: "loadUserSuccess", payload: res.data });
   } catch (error) {
     dispatch({ type: "loadUserFailure", payload: error.response.data.message });
   }
 };
 
-export const addTask = (title, description) => async (dispatch) => {
+export const loadProfile = (id) => async (dispatch) => {
+  //('hiiload '+id);
   try {
-    dispatch({ type: "addTaskRequest" });
+    dispatch({ type: "loadProfileRequest" });
+    
+    const res = await axios.get(`${serverUrl}/profile/${id}`);
+    ////(res);
+    loadUser();
+    dispatch({ type: "loadProfileSuccess", payload: res.data });
+  } catch (error) {
+    dispatch({ type: "loadProfileFailure", payload: error.response.data.message });
+  }
+};
+
+export const deleteProfile = (id) => async (dispatch) => {
+  ////('hiiload '+id);
+  try {
+    dispatch({ type: "deleteProfileRequest" });
+    
+    const res = await axios.delete(`${serverUrl}/profile/${id}`);
+    ////(res);
+    loadUser();
+    dispatch({ type: "deleteProfileSuccess", payload: res.data });
+  } catch (error) {
+    dispatch({ type: "deleteProfileFailure", payload: error.response.data.message });
+  }
+};
+
+export const addProfile = (name) => async (dispatch) => {
+  try {
+    dispatch({ type: "addProfileRequest" });
 
     const { data } = await axios.post(
-      `${serverUrl}/newtask`,
+      `${serverUrl}/newprofile`,
       {
-        title,
-        description,
+        name
       },
       {
         headers: {
@@ -51,9 +79,9 @@ export const addTask = (title, description) => async (dispatch) => {
         },
       }
     );
-    dispatch({ type: "addTaskSuccess", payload: data.message });
+    dispatch({ type: "addProfileSuccess", payload: data.message });
   } catch (error) {
-    dispatch({ type: "addTaskFailure", payload: error.response.data.message });
+    dispatch({ type: "addProfileFailure", payload: error.response.data.message });
   }
 };
 
@@ -88,7 +116,7 @@ export const deleteTask = (taskId) => async (dispatch) => {
 export const addname = (formData) => async (dispatch) => {
   try {
     dispatch({ type: "updateProfileRequest" });
-    //console.log(formData)
+    ////(formData)
     const res = await axios.put(`${serverUrl}/addname`, formData,{
       headers: {
         "Content-Type": "application/json",
@@ -96,10 +124,11 @@ export const addname = (formData) => async (dispatch) => {
     });
     //loadUser();
     dispatch({ type: "updateProfileSuccess", payload: res.data });
-    //console.log(res.data);
-    //console.log('res');
+    loadUser();
+    ////(res.data);
+    ////('res');
   } catch (error) {
-    console.log(error);
+    //(error);
     dispatch({
       type: "updateProfileFailure",
       payload: error.response.data.message,
@@ -129,9 +158,11 @@ export const updateProfile = (formData) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     dispatch({ type: "logoutRequest" });
-
+    //("logout")
     await axios.get(`${serverUrl}/logout`);
     dispatch({ type: "logoutSuccess" });
+    loadUser()
+    loadProfile()
   } catch (error) {
     dispatch({
       type: "logoutFailure",
@@ -154,6 +185,6 @@ export const register = (formData) => async (dispatch) => {
       type: "registerFailure",
       payload: error.response.data.message,
     });
-    console.log(error)
+    //(error)
   }
 };

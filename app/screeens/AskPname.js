@@ -13,23 +13,39 @@ import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Loader from '../../components/common/Loader';
 import styles from './common.style';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { addname, loadUser, addProfile, loadProfile } from '../../redux/action';
+import { useEffect } from 'react';
 
-const AddRecord = ({navigation}) => {
-  const { profile } = useSelector(state => state.auth)
-  const { user } = useSelector(state => state.auth)
-  
+const AskPname = ({navigation}) => {
 
-  const User=user?user.profiles[0]:null
-  const Profile= profile?profile:user?user.profiles[0]:{pname:"", _id:"",records:""}
   
+    const dispatch=useDispatch();
+    useEffect(() => {
+      dispatch(loadUser());
+    }, []);
+    const { user } = useSelector(state => state.auth)
+    
+    const { profile } = useSelector(state => state.auth)
+    
+
   const [errors, setErrors] = React.useState({});
   const [loading, setLoading] = React.useState(false);
-  const [name, setName] = useState(null);
+  const [name, setName] = useState("");
   const [data, setData] = useState(null);
+
   
-  const registerUser=()=>{
+  const add=async (name)=>{
+
     
+    
+    const myForm={
+      "name":name
+    }
+    dispatch(addProfile(name));
+    dispatch(loadUser());
+    navigation.navigate('Nav')
   }
 
   const validate = () => {
@@ -42,14 +58,9 @@ const AddRecord = ({navigation}) => {
       isValid = false;
     }
 
-    if (!data) {
-        handleError('Please input data', 'data');
-        isValid = false;
-      }
-
 
     if (isValid) {
-      registerUser(name,email,password);
+      add(name);
     }
   };
 
@@ -64,8 +75,8 @@ const AddRecord = ({navigation}) => {
       <ScrollView
         contentContainerStyle={{paddingTop: 50, paddingHorizontal: 20}}>
       <View style={styles.container2}>
-      <Text style={styles.userName}>Welcome {Profile.pname}</Text>
-      <Text style={styles.welcomeMessage}>Add your Records here:</Text>
+      <Text style={styles.userName}>Welcome User</Text>
+      <Text style={styles.welcomeMessage}>Add your Name here:</Text>
       </View>
         <View style={{marginVertical: 20}}>
           
@@ -77,24 +88,12 @@ const AddRecord = ({navigation}) => {
             value={name}
             id="name"
             label="Full Name"
-            placeholder="Enter your full name"
+            placeholder="Enter your Full name"
             error={errors.name}
           />
 
-            <Input
-            onChangeText={text => setData(text)}
-            onFocus={() => handleError(null, 'name')}
-            iconName="account-outline"
-            value={data}
-            multiline
-        numberOfLines={4}
-            id="data"
-            label="Data"
-            placeholder="Enter your record"
-            error={errors.name}
-          />
 
-          <Button title="Add Record" onPress={validate} />
+          <Button title="Add" onPress={validate} />
           
         </View>
       </ScrollView>
@@ -102,4 +101,4 @@ const AddRecord = ({navigation}) => {
   );
 };
 
-export default AddRecord;
+export default AskPname;

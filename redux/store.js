@@ -4,7 +4,6 @@ import { authReducer} from "./reducer";
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    //message: messageReducer,
   },
   middleware: getDefaultMiddleware =>
   getDefaultMiddleware({

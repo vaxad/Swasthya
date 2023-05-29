@@ -9,6 +9,8 @@ import Doctors from './Doctors';
 import Rewards from './Rewards';
 import Asha from './Asha';
 import Profile from './Profile';
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/action";
 
 const home='Home'
 const doctors='Doctors'
@@ -18,8 +20,9 @@ const asha='Asha'
 
 const Tab = createBottomTabNavigator();
 const BottomNavigator = ({navigation}) => {
+    const dispatch=useDispatch();
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite, marginTop:90 }}>
     <Tab.Navigator 
                 initialRouteName={home}
                 screenOptions={({route})=>({tabBarIcon:({focused,color,size})=>{

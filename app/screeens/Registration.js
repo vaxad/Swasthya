@@ -15,16 +15,31 @@ import Loader from '../../components/common/Loader';
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 import {firebaseConfig} from '../../firebaseConfig'
 import firebase from 'firebase/compat/app'
-import { getAuth } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { loadUser, register } from '../../redux/action';
 import { useSelector } from 'react-redux';
-import { context } from '../index';
+import { useEffect } from 'react';
 
 const RegistrationScreen = ({navigation}) => {
   
-  //const a=useContext(context);
-  const { user } = useSelector(state => state.auth)
+  const dispatch=useDispatch();
+  const [req,setReq]=useState(false);
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
+const { user } = useSelector(state => state.auth)
+
+  if(user){
+    if(user.name==="none"){
+      console.log("ask")
+      navigation.replace('askName');
+    }else{
+      console.log("login")
+      
+      navigation.replace('Nav');
+      
+    }
+  }
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('none');
@@ -35,7 +50,7 @@ const RegistrationScreen = ({navigation}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isDisabled2, setIsDisabled2] = useState(true);
   
-  const dispatch=useDispatch();
+  
 
   const sendVerification=()=>{
     setIsDisabled(true);
@@ -46,6 +61,7 @@ const RegistrationScreen = ({navigation}) => {
   }
 
   const confirmCode=()=>{
+    
     setIsDisabled2(false);
     const credential= firebase.auth.PhoneAuthProvider.credential(
       verificationId,
@@ -57,44 +73,27 @@ const RegistrationScreen = ({navigation}) => {
         "name":name,
         "phone":phone
       }
-      //console.log(myForm)
       try {
         dispatch(register(myForm))
-        //console.log(user);
       } catch (e) {
-        //console.log(e)
+        console.log(e)
       }
-
-      dispatch(loadUser());
       
-      // setCode('')
-      // setPhone('');
-      
-        if(user.name==="none"){
-          navigation.navigate('askName')
-        }else{
-      
-      Alert.alert('LOGIN SUCCESSFUL');
-      navigation.navigate('Nav')
-        }
-    })
+      })
+    
     .catch((error)=>{
+      console.log(error)
       alert('Invalid OTP');
-      // setCode('');
-      // setPhone('');
-      navigation.navigate('Nav')
+      setCode('');
+      setPhone('');
+      setIsDisabled2(true);
+      setIsDisabled(false);
     })
   }
 
   const validate = () => {
     Keyboard.dismiss();
     let isValid = true;
-
-    
-    // if (!name) {
-    //   handleError('Please input name', 'name');
-    //   isValid = false;
-    // }
 
     if (!phone) {
       handleError('Please input phone number', 'phone');

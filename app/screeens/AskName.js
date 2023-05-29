@@ -20,24 +20,32 @@ import { useEffect } from 'react';
 
 const AskName = ({navigation}) => {
 
+  
     const dispatch=useDispatch();
+    useEffect(() => {
+      dispatch(loadUser());
+    }, []);
     const { user } = useSelector(state => state.auth)
+    const { nameAdd } = useSelector(state => state.auth)
+    
+    if(nameAdd){
+      navigation.replace("Nav");
+    }
   const [errors, setErrors] = React.useState({});
   const [loading, setLoading] = React.useState(false);
-  const [name, setName] = useState(null);
+  const [name, setName] = useState(user?user.name==="none"?"":user.name:"");
   const [data, setData] = useState(null);
 
   
   const add=async (name)=>{
 
     
-    dispatch(loadUser());
+    
     const myForm={
       "name":name
     }
     dispatch(addname(myForm));
     dispatch(loadUser());
-    navigation.navigate("Nav");
   }
 
   const validate = () => {

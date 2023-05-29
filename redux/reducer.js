@@ -25,14 +25,17 @@ export const authReducer = createReducer(
     registerRequest: (state) => {
       state.loading = true;
     },
-    registerSuccess: (state, action) => {
+    registerSuccess: (state=null, action) => {
       
-      //console.log(action.payload.data);
+      ////('reg')
+      ////(action.payload.data.user);
       state.loading = false;
       state.isAuthenticated = true;
       state.user = action.payload.data.user;
+      //(state.user);
       //a.setState('hii')
       state.message = action.payload.data.message;
+      
     },
     registerFailure: (state, action) => {
       state.loading = false;
@@ -44,13 +47,45 @@ export const authReducer = createReducer(
       state.loading = true;
     },
     loadUserSuccess: (state, action) => {
-      console.log('load')
+      ////('load')
       state.loading = false;
       state.isAuthenticated = true;
       state.user = action.payload.user;
-      console.log(action.payload);
+      ////(action.payload);
     },
     loadUserFailure: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.error = action.payload.data;
+    },
+
+    loadProfileRequest: (state) => {
+      state.loading = true;
+    },
+    loadProfileSuccess: (state, action) => {
+      ////('load')
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.profile=action.payload.profile;
+      ////(action.payload);
+    },
+    loadProfileFailure: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.error = action.payload.data;
+    },
+
+    deleteProfileRequest: (state) => {
+      state.loading = true;
+    },
+    deleteProfileSuccess: (state, action) => {
+      ////('load')
+      state.loading = false;
+      state.isAuthenticated = true;
+      ////(action.payload.profile)
+      ////(action.payload);
+    },
+    deleteProfileFailure: (state, action) => {
       state.loading = false;
       state.isAuthenticated = false;
       state.error = action.payload.data;
@@ -94,110 +129,27 @@ export const authReducer = createReducer(
       state.loading = true;
     },
     updateProfileSuccess: (state, action) => {
-      //console.log(action.payload)
+      ////(action.payload)
       state.loading = false;
+      state.nameAdd=true;
       state.message = action.payload.message;
     },
     updateProfileFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload.data;
     },
+    addTaskRequest: (state) => {
+      state.loading = true;
+    },
+    addTaskSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.data;
+    },
+    addTaskFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.data;
+    },
   }
 );
 
-// export const messageReducer = createReducer(
-//   {},
-//   {
-//     addTaskRequest: (state) => {
-//       state.loading = true;
-//     },
-//     addTaskSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     addTaskFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
 
-//     updateTaskRequest: (state) => {
-//       state.loading = true;
-//     },
-//     updateTaskSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     updateTaskFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
-
-//     deleteTaskRequest: (state) => {
-//       state.loading = true;
-//     },
-//     deleteTaskSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     deleteTaskFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
-
-//     updateProfileRequest: (state) => {
-//       state.loading = true;
-//     },
-//     updateProfileSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     updateProfileFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
-
-//     updatePasswordRequest: (state) => {
-//       state.loading = true;
-//     },
-//     updatePasswordSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     updatePasswordFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
-
-//     forgetPasswordRequest: (state) => {
-//       state.loading = true;
-//     },
-//     forgetPasswordSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     forgetPasswordFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
-
-//     resetPasswordRequest: (state) => {
-//       state.loading = true;
-//     },
-//     resetPasswordSuccess: (state, action) => {
-//       state.loading = false;
-//       state.message = action.payload.data;
-//     },
-//     resetPasswordFailure: (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload.data;
-//     },
-
-//     clearError: (state) => {
-//       state.error = null;
-//     },
-
-//     clearMessage: (state) => {
-//       state.message = null;
-//     },
-//   }
-// );
