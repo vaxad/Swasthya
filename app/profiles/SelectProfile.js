@@ -37,14 +37,14 @@ const SelectProfile = ({ navigation }, state) => {
 
   function __delay__(timer) {
     return new Promise(resolve => {
-        timer = timer || 2000;
-        setTimeout(function () {
-            resolve();
-        }, timer);
+      timer = timer || 2000;
+      setTimeout(function () {
+        resolve();
+      }, timer);
     });
-};
-  
- 
+  };
+
+
   const User = user ? user.profiles[0] : null;
   const Profile = profile ? profile : { pname: "", _id: "", records: "" };
 
@@ -72,7 +72,7 @@ const SelectProfile = ({ navigation }, state) => {
         onPress={async () => {
           //console.log(item);
           dispatch(loadProfile(item._id));
-         navigation.navigate("Nav")
+          navigation.navigate("Nav")
         }}
       >
         <Image

@@ -1,8 +1,8 @@
-import { SafeAreaView, Text,View } from "react-native";
-import { COLORS, icons, images, SIZES,FONT } from '../constants';
+import { SafeAreaView, Text, View } from "react-native";
+import { COLORS, icons, images, SIZES, FONT } from '../constants';
 import ScreenHeaderBtn from '../components/common/header/ScreenHeaderBtn'
 import React, { useState } from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomNavigator from './screeens/BottomNav';
 import { Stack, useRouter } from "expo-router";
@@ -20,15 +20,15 @@ import Loading from "./screeens/Loading";
 import { TransitionPresets, CardStyleInterpolators } from "react-navigation-stack";
 
 const StackNav = createStackNavigator();
-function Nav({navigation}) {
-  const dispatch=useDispatch();
-  
+function Nav({ navigation }) {
+  const dispatch = useDispatch();
+
 
   const { user } = useSelector(state => state.auth)
-  
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite}}>
-    <BottomNavigator navigation={navigation}/>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+      <BottomNavigator navigation={navigation} />
     </SafeAreaView>
   );
 }
@@ -45,108 +45,118 @@ const config = {
   },
 };
 
-function Main({navigation}) {
-  const dispatch=useDispatch();
+function Main({ navigation }) {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch])
   const { user } = useSelector(state => state.auth)
-  const {isAuthenticated}=useSelector(state => state.auth);
+  const { isAuthenticated } = useSelector(state => state.auth);
 
-  let auth=false;
-  const [load,setLoad]=useState(true);
+  let auth = false;
+  const [load, setLoad] = useState(true);
   useEffect(() => {
-    if(isAuthenticated===true || isAuthenticated===false){
+    if (isAuthenticated === true || isAuthenticated === false) {
       setLoad(false);
-      auth=isAuthenticated;
-    }else{
-      auth=isAuthenticated;
+      auth = isAuthenticated;
+    } else {
+      auth = isAuthenticated;
       setLoad(true);
     }
   }, []);
   return (
-    
-    
+
+
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
-    <Stack.Screen
+      <Stack.Screen
         options={{
           headerShown: false
-      }}
+        }}
       />
-    
-    <StackNav.Navigator 
-    initialRouteName={load?"loading":auth?"Nav":"registration"}
+
+      <StackNav.Navigator
+        initialRouteName={load ? "loading" : auth ? "Nav" : "registration"}
         screenOptions={{
-          
-          gestureEnabled:true,
-          gestureDirection:"horizontal",
-          
+
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
+
           CardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
         }}
-        >
-          
-    <StackNav.Screen name="loading" component={Loading} options={{ headerShown: false }} />
-    <StackNav.Screen name="registration" component={RegistrationScreen} options={{ headerShown: false }} />
-      <StackNav.Screen
-        name="Nav"
-        component={Nav}
-        options={({navigation})=>({
-          gestureEnabled:true,
-          gestureDirection:"horizontal",
-          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          headerStyle: { backgroundColor: COLORS.lightWhite },
-          headerShadowVisible: false,
-          headerRight: () => {
-              return(
-                <View style={{marginRight:25}}>
-              <ScreenHeaderBtn iconUrl={require('../assets/icons/qrcode.png')} dimensions="80%" handlePress={()=>{navigation.navigate('qr')}} />
-              </View>
+      >
+
+        <StackNav.Screen name="loading" component={Loading} options={{ headerShown: false }} />
+        <StackNav.Screen name="registration" component={RegistrationScreen} options={{ headerShown: false }} />
+        <StackNav.Screen
+          name="Nav"
+          component={Nav}
+          options={({ navigation }) => ({
+            gestureEnabled: true,
+            gestureDirection: "horizontal",
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            headerStyle: { backgroundColor: COLORS.lightWhite },
+            headerShadowVisible: false,
+            headerRight: () => {
+              return (
+                <View style={{ marginRight: 25 }}>
+                  <ScreenHeaderBtn iconUrl={require('../assets/icons/qrcode.png')} dimensions="80%" handlePress={() => { navigation.navigate('qr') }} />
+                </View>
               )
-          },
-          headerLeft: () => {
-            
-              return(
-                <View style={{marginLeft:25}}>
-              <ScreenHeaderBtn iconUrl={require('../assets/images/user.png')} dimensions="100%" handlePress={()=>{navigation.navigate('selectProfile')}}/>
-              </View>
+            },
+            headerLeft: () => {
+
+              return (
+                <View style={{ marginLeft: 25 }}>
+                  <ScreenHeaderBtn iconUrl={require('../assets/images/user.png')} dimensions="100%" handlePress={() => { navigation.navigate('selectProfile') }} />
+                </View>
               )
 
-          },
-          title: "Swasthyá",
-          headerTransparent:"true",
-          headerTitleAlign: 'center',
-          headerTitleStyle:{
-            fontFamily: FONT.bold,
+            },
+            title: "Swasthyá",
+            headerTransparent: "true",
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: FONT.bold,
               fontSize: SIZES.xLarge,
               color: '#FF7927',
               marginTop: 2,
             }
-            })}
-      />
-      <StackNav.Screen name="selectProfile" component={SelectProfile} options={{ gestureEnabled:true,
-          gestureDirection:"horizontal",
+          })}
+        />
+        <StackNav.Screen name="selectProfile" component={SelectProfile} options={{
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          headerShown: false }}/>
-      <StackNav.Screen name="addRecord" component={AddRecord} options={{gestureEnabled:true,
-          gestureDirection:"horizontal",
+          headerShown: false
+        }} />
+        <StackNav.Screen name="addRecord" component={AddRecord} options={{
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-           headerShown: false }}/>
-      <StackNav.Screen name="splash" component={Splash} options={{ headerShown: false }}/>
-      <StackNav.Screen name="qr" component={Qr} options={{gestureEnabled:true,
-          gestureDirection:"horizontal",
+          headerShown: false
+        }} />
+        <StackNav.Screen name="splash" component={Splash} options={{ headerShown: false }} />
+        <StackNav.Screen name="qr" component={Qr} options={{
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-           headerShown: false }}/>
-      <StackNav.Screen name="askName" component={AskName} options={{gestureEnabled:true,
-          gestureDirection:"horizontal",
+          headerShown: false
+        }} />
+        <StackNav.Screen name="askName" component={AskName} options={{
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-           headerShown: false }} />
-      <StackNav.Screen name="askPname" component={AskPname} options={{gestureEnabled:true,
-          gestureDirection:"horizontal",
+          headerShown: false
+        }} />
+        <StackNav.Screen name="askPname" component={AskPname} options={{
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-           headerShown: false }} />
-    </StackNav.Navigator>
-  
-  </SafeAreaView>
+          headerShown: false
+        }} />
+      </StackNav.Navigator>
+
+    </SafeAreaView>
   );
 }
 

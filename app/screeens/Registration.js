@@ -1,4 +1,4 @@
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 import React, { useContext, useRef, useState } from 'react';
 import {
   View,
@@ -8,36 +8,36 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import {COLORS} from '../../constants';
+import { COLORS } from '../../constants';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Loader from '../../components/common/Loader';
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
-import {firebaseConfig} from '../../firebaseConfig'
+import { firebaseConfig } from '../../firebaseConfig'
 import firebase from 'firebase/compat/app'
 import { useDispatch } from 'react-redux';
 import { loadUser, register } from '../../redux/action';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-const RegistrationScreen = ({navigation}) => {
-  
-  const dispatch=useDispatch();
-  const [req,setReq]=useState(false);
+const RegistrationScreen = ({ navigation }) => {
+
+  const dispatch = useDispatch();
+  const [req, setReq] = useState(false);
   useEffect(() => {
     dispatch(loadUser());
   }, []);
-const { user } = useSelector(state => state.auth)
+  const { user } = useSelector(state => state.auth)
 
-  if(user){
-    if(user.name==="none"){
+  if (user) {
+    if (user.name === "none") {
       console.log("ask")
       navigation.replace('askName');
-    }else{
+    } else {
       console.log("login")
-      
+
       navigation.replace('Nav');
-      
+
     }
   }
   const [errors, setErrors] = useState({});
@@ -46,49 +46,49 @@ const { user } = useSelector(state => state.auth)
   const [verificationId, setVerificationId] = useState(null);
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
-  const recaptchaVerifier=useRef(null)
+  const recaptchaVerifier = useRef(null)
   const [isDisabled, setIsDisabled] = useState(false);
   const [isDisabled2, setIsDisabled2] = useState(true);
-  
-  
 
-  const sendVerification=()=>{
+
+
+  const sendVerification = () => {
     setIsDisabled(true);
     setIsDisabled2(false);
-    const phoneProvider=new firebase.auth.PhoneAuthProvider;
-    phoneProvider.verifyPhoneNumber(('+91'+phone),recaptchaVerifier.current).then(setVerificationId).catch((error)=>{console.log(error)});
+    const phoneProvider = new firebase.auth.PhoneAuthProvider;
+    phoneProvider.verifyPhoneNumber(('+91' + phone), recaptchaVerifier.current).then(setVerificationId).catch((error) => { console.log(error) });
     setIsDisabled2(false);
   }
 
-  const confirmCode=()=>{
-    
+  const confirmCode = () => {
+
     setIsDisabled2(false);
-    const credential= firebase.auth.PhoneAuthProvider.credential(
+    const credential = firebase.auth.PhoneAuthProvider.credential(
       verificationId,
       code
     );
     firebase.auth().signInWithCredential(credential)
-    .then(()=>{
-      const myForm = {
-        "name":name,
-        "phone":phone
-      }
-      try {
-        dispatch(register(myForm))
-      } catch (e) {
-        console.log(e)
-      }
-      
+      .then(() => {
+        const myForm = {
+          "name": name,
+          "phone": phone
+        }
+        try {
+          dispatch(register(myForm))
+        } catch (e) {
+          console.log(e)
+        }
+
       })
-    
-    .catch((error)=>{
-      console.log(error)
-      alert('Invalid OTP');
-      setCode('');
-      setPhone('');
-      setIsDisabled2(true);
-      setIsDisabled(false);
-    })
+
+      .catch((error) => {
+        console.log(error)
+        alert('Invalid OTP');
+        setCode('');
+        setPhone('');
+        setIsDisabled2(true);
+        setIsDisabled(false);
+      })
   }
 
   const validate = () => {
@@ -98,30 +98,30 @@ const { user } = useSelector(state => state.auth)
     if (!phone) {
       handleError('Please input phone number', 'phone');
       isValid = false;
-    }  
+    }
 
     if (isValid) {
       sendVerification;
     }
   };
-  
+
   const handleError = (error, input) => {
-    setErrors(prevState => ({...prevState, [input]: error}));
+    setErrors(prevState => ({ ...prevState, [input]: error }));
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <Loader visible={loading} />
       <ScrollView
-        contentContainerStyle={{paddingTop: 50, paddingHorizontal: 20}}>
-          <FirebaseRecaptchaVerifierModal
+        contentContainerStyle={{ paddingTop: 50, paddingHorizontal: 20 }}>
+        <FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
-          firebaseConfig={firebaseConfig}/>
-        <Text style={{color: COLORS.primary, fontSize: 40, fontWeight: 'bold'}}>
+          firebaseConfig={firebaseConfig} />
+        <Text style={{ color: COLORS.primary, fontSize: 40, fontWeight: 'bold' }}>
           Login using OTP
         </Text>
-        
-        <View style={{marginVertical: 20}}>
+
+        <View style={{ marginVertical: 20 }}>
 
           <Input
             keyboardType="numeric"
@@ -133,7 +133,7 @@ const { user } = useSelector(state => state.auth)
             placeholder="Enter your phone no"
             error={errors.phone}
           />
-          <Button title="Send OTP" onPress={sendVerification}  disabled={isDisabled}/>
+          <Button title="Send OTP" onPress={sendVerification} disabled={isDisabled} />
           <Input
             onChangeText={setCode}
             value={code}
@@ -142,7 +142,7 @@ const { user } = useSelector(state => state.auth)
             label="OTP"
             placeholder="Enter OTP"
           />
-          <Button title="Verify OTP" onPress={confirmCode} disabled={isDisabled2}/>
+          <Button title="Verify OTP" onPress={confirmCode} disabled={isDisabled2} />
         </View>
       </ScrollView>
     </SafeAreaView>

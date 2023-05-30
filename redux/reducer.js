@@ -6,7 +6,7 @@ import { context } from "../app/index";
 export const authReducer = createReducer(
   {},
   {
-   
+
     loginRequest: (state) => {
       state.loading = true;
     },
@@ -25,8 +25,8 @@ export const authReducer = createReducer(
     registerRequest: (state) => {
       state.loading = true;
     },
-    registerSuccess: (state=null, action) => {
-      
+    registerSuccess: (state = null, action) => {
+
       ////('reg')
       ////(action.payload.data.user);
       state.loading = false;
@@ -35,7 +35,7 @@ export const authReducer = createReducer(
       //(state.user);
       //a.setState('hii')
       state.message = action.payload.data.message;
-      
+
     },
     registerFailure: (state, action) => {
       state.loading = false;
@@ -66,7 +66,7 @@ export const authReducer = createReducer(
       ////('load')
       state.loading = false;
       state.isAuthenticated = true;
-      state.profile=action.payload.profile;
+      state.profile = action.payload.profile;
       ////(action.payload);
     },
     loadProfileFailure: (state, action) => {
@@ -131,7 +131,7 @@ export const authReducer = createReducer(
     updateProfileSuccess: (state, action) => {
       ////(action.payload)
       state.loading = false;
-      state.nameAdd=true;
+      state.nameAdd = true;
       state.message = action.payload.message;
     },
     updateProfileFailure: (state, action) => {

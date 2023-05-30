@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SIZES,SHADOWS } from "../../constants";
+import { COLORS, FONT, SIZES, SHADOWS } from "../../constants";
 
 const styles = StyleSheet.create({
-  
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -22,20 +22,20 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     marginTop: SIZES.medium,
-    marginHorizontal:SIZES.large,
+    marginHorizontal: SIZES.large,
     gap: SIZES.small,
   },
   //
   container: {
-    marginTop:SIZES.xLarge,
-    marginHorizontal:SIZES.large,
-    paddingHorizontal:SIZES.small,
+    marginTop: SIZES.xLarge,
+    marginHorizontal: SIZES.large,
+    paddingHorizontal: SIZES.small,
     width: "100%",
   },
   container2: {
-    paddingTop:SIZES.xxLarge,
-    marginTop:SIZES.xLarge,
-    marginHorizontal:SIZES.small,
+    paddingTop: SIZES.xxLarge,
+    marginTop: SIZES.xLarge,
+    marginHorizontal: SIZES.small,
     width: "100%",
   },
   userName: {
@@ -51,15 +51,15 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     justifyContent: "center",
-    backgroundColor:"#000000",
-    color:COLORS.lightWhite,
-    width:"80%",
-    borderWidth:3,
+    backgroundColor: "#000000",
+    color: COLORS.lightWhite,
+    width: "80%",
+    borderWidth: 3,
     alignItems: "center",
     flexDirection: "row",
-    borderColor:COLORS.primary,
+    borderColor: COLORS.primary,
     marginTop: SIZES.large,
-    borderRadius:SIZES.small/1.25,
+    borderRadius: SIZES.small / 1.25,
     height: 50,
   },
   searchWrapper: {
@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
   logoContainer: {
     width: 50,
     height: 50,
-    backgroundColor:COLORS.white,
+    backgroundColor: COLORS.white,
     borderRadius: SIZES.medium,
     justifyContent: "center",
-    flexDirection:"row",
+    flexDirection: "row",
     alignItems: "center",
   },
   logoImage: {
@@ -137,19 +137,19 @@ const styles = StyleSheet.create({
   infoContainer: {
     marginTop: SIZES.large,
   },
-  btnTitle:{
+  btnTitle: {
     fontSize: SIZES.large,
     fontFamily: FONT.medium,
-    color:COLORS.white,
+    color: COLORS.white,
   },
   infoWrapper: {
     flexDirection: "row",
     marginTop: 5,
     justifyContent: "flex-start",
-    color:COLORS.white,
+    color: COLORS.white,
     alignItems: "center",
   },
-  publisher:{
+  publisher: {
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.bold,
     color: COLORS.white,

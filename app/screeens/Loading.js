@@ -7,19 +7,19 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { ImageBackground } from 'react-native';
 
-const Loading = ({navigation}) => {
+const Loading = ({ navigation }) => {
 
   const { user } = useSelector(state => state.auth)
   const { isAuthenticated } = useSelector(state => state.auth)
-  if(isAuthenticated!==undefined){
-    if(isAuthenticated){
-        navigation.replace('Nav')
-    }else{
-        navigation.replace('registration')
+  if (isAuthenticated !== undefined) {
+    if (isAuthenticated) {
+      navigation.replace('Nav')
+    } else {
+      navigation.replace('registration')
     }
   }
   return (
-    <ImageBackground source={require('../../assets/splash2.png')} style={{width:'100%', height:'100%'}}>
+    <ImageBackground source={require('../../assets/splash2.png')} style={{ width: '100%', height: '100%' }}>
     </ImageBackground>
   )
 }

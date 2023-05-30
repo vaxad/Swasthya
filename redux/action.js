@@ -27,7 +27,7 @@ export const loadUser = () => async (dispatch) => {
   ////('hii');
   try {
     dispatch({ type: "loadUserRequest" });
-    
+
     const res = await axios.get(`${serverUrl}/me`);
     //(res.data);
     dispatch({ type: "loadUserSuccess", payload: res.data });
@@ -40,7 +40,7 @@ export const loadProfile = (id) => async (dispatch) => {
   //('hiiload '+id);
   try {
     dispatch({ type: "loadProfileRequest" });
-    
+
     const res = await axios.get(`${serverUrl}/profile/${id}`);
     ////(res);
     loadUser();
@@ -54,7 +54,7 @@ export const deleteProfile = (id) => async (dispatch) => {
   ////('hiiload '+id);
   try {
     dispatch({ type: "deleteProfileRequest" });
-    
+
     const res = await axios.delete(`${serverUrl}/profile/${id}`);
     ////(res);
     loadUser();
@@ -117,7 +117,7 @@ export const addname = (formData) => async (dispatch) => {
   try {
     dispatch({ type: "updateProfileRequest" });
     ////(formData)
-    const res = await axios.put(`${serverUrl}/addname`, formData,{
+    const res = await axios.put(`${serverUrl}/addname`, formData, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -174,12 +174,12 @@ export const logout = () => async (dispatch) => {
 export const register = (formData) => async (dispatch) => {
   try {
     //dispatch({ type: "registerRequest" });
-    const res=await axios.post(`${serverUrl}/register`, formData, {
+    const res = await axios.post(`${serverUrl}/register`, formData, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    dispatch({ type: "registerSuccess", payload:res });
+    dispatch({ type: "registerSuccess", payload: res });
   } catch (error) {
     dispatch({
       type: "registerFailure",
