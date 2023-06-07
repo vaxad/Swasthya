@@ -8,7 +8,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { COLORS } from '../../constants';
+import { COLORS, FONT } from '../../constants';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Loader from '../../components/common/Loader';
@@ -75,6 +75,15 @@ const RegistrationScreen = ({ navigation }) => {
         }
         try {
           dispatch(register(myForm))
+          if (user) {
+            
+          
+              console.log("login")
+        
+              navigation.replace('Nav');
+        
+            
+          }
         } catch (e) {
           console.log(e)
         }
@@ -117,7 +126,7 @@ const RegistrationScreen = ({ navigation }) => {
         <FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
           firebaseConfig={firebaseConfig} />
-        <Text style={{ color: COLORS.primary, fontSize: 40, fontWeight: 'bold' }}>
+        <Text style={{ color: COLORS.primary, fontSize: 40, fontFamily:FONT.medium }}>
           Login using OTP
         </Text>
 

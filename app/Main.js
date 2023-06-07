@@ -18,6 +18,7 @@ import Qr from "./screeens/Qr";
 import AskPname from "./screeens/AskPname";
 import Loading from "./screeens/Loading";
 import { TransitionPresets, CardStyleInterpolators } from "react-navigation-stack";
+import AddRecords from "./screeens/AddRecords";
 
 const StackNav = createStackNavigator();
 function Nav({ navigation }) {
@@ -49,7 +50,7 @@ function Main({ navigation }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
-  }, [dispatch])
+  }, [])
   const { user } = useSelector(state => state.auth)
   const { isAuthenticated } = useSelector(state => state.auth);
 
@@ -60,6 +61,7 @@ function Main({ navigation }) {
       setLoad(false);
       auth = isAuthenticated;
     } else {
+    dispatch(loadUser());
       auth = isAuthenticated;
       setLoad(true);
     }
@@ -75,7 +77,8 @@ function Main({ navigation }) {
       />
 
       <StackNav.Navigator
-        initialRouteName={load ? "loading" : auth ? "Nav" : "registration"}
+        // initialRouteName={load ? "loading" : auth ? "Nav" : "registration"}
+        initialRouteName="registration"
         screenOptions={{
 
           gestureEnabled: true,
@@ -94,12 +97,12 @@ function Main({ navigation }) {
             gestureEnabled: true,
             gestureDirection: "horizontal",
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            headerStyle: { backgroundColor: COLORS.lightWhite },
+            headerStyle: { backgroundColor: "#006089" },
             headerShadowVisible: false,
             headerRight: () => {
               return (
                 <View style={{ marginRight: 25 }}>
-                  <ScreenHeaderBtn iconUrl={require('../assets/icons/qrcode.png')} dimensions="80%" handlePress={() => { navigation.navigate('qr') }} />
+                  <ScreenHeaderBtn iconUrl={require('../assets/icons/qr.png')} dimensions="80%" handlePress={() => { navigation.navigate('qr') }} />
                 </View>
               )
             },
@@ -107,18 +110,17 @@ function Main({ navigation }) {
 
               return (
                 <View style={{ marginLeft: 25 }}>
-                  <ScreenHeaderBtn iconUrl={require('../assets/images/user.png')} dimensions="100%" handlePress={() => { navigation.navigate('selectProfile') }} />
+                  <ScreenHeaderBtn iconUrl={require('../assets/images/pfp.png')} dimensions="100%" handlePress={() => { navigation.navigate('selectProfile') }} />
                 </View>
               )
 
             },
             title: "Swasthyá",
-            headerTransparent: "true",
             headerTitleAlign: 'center',
             headerTitleStyle: {
               fontFamily: FONT.bold,
               fontSize: SIZES.xLarge,
-              color: '#FF7927',
+              color: COLORS.btn1,
               marginTop: 2,
             }
           })}
@@ -129,7 +131,7 @@ function Main({ navigation }) {
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerShown: false
         }} />
-        <StackNav.Screen name="addRecord" component={AddRecord} options={{
+        <StackNav.Screen name="addRecord" component={AddRecords} options={{
           gestureEnabled: true,
           gestureDirection: "horizontal",
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -154,6 +156,7 @@ function Main({ navigation }) {
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           headerShown: false
         }} />
+        
       </StackNav.Navigator>
 
     </SafeAreaView>

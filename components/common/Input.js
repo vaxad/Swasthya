@@ -6,7 +6,9 @@ const Input = ({
   label,
   iconName,
   error,
+  date,
   password,
+  disabled,
   onFocus = () => {},
   ...props
 }) => {
@@ -31,8 +33,10 @@ const Input = ({
           name={iconName}
           style={{color: COLORS.primary, fontSize: 22, marginRight: 10}}
         />
-        <TextInput
+       {disabled? <Text>{date}</Text>:<TextInput
           autoCorrect={false}
+          editable={disabled}
+          selectTextOnFocus={disabled}
           onFocus={() => {
             onFocus();
             setIsFocused(true);
@@ -41,7 +45,7 @@ const Input = ({
           secureTextEntry={hidePassword}
           style={{color: COLORS.primary, flex: 1}}
           {...props}
-        />
+        />}
         {password && (
           <Icon
             onPress={() => setHidePassword(!hidePassword)}

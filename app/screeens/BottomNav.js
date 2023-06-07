@@ -11,23 +11,25 @@ import Asha from './Asha';
 import Profile from './Profile';
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/action";
+import AddRecords from "./AddRecords";
 
 const home = 'Home'
 const doctors = 'Doctors'
 const rewards = 'Rewards'
 const profile = 'Profile'
-const asha = 'Asha'
+const asha = 'ABHA'
 
 const Tab = createBottomTabNavigator();
 const BottomNavigator = ({ navigation }) => {
     const dispatch = useDispatch();
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite, marginTop: 90 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite, }}>
             <Tab.Navigator
                 initialRouteName={home}
                 screenOptions={({ route }) => ({
+                    tabBarStyle: { position: 'absolute', backgroundColor:COLORS.blue },
                     tabBarIcon: ({ focused, color, size }) => {
-                        color = COLORS.primary;
+                        color = COLORS.pink;
                         let iconName;
                         let routeName = route.name;
                         switch (routeName) {
@@ -51,11 +53,12 @@ const BottomNavigator = ({ navigation }) => {
                     }
                 })}
             >
-                <Tab.Screen name={home} navigation={navigation} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.primary } }} component={Home} />
-                <Tab.Screen name={doctors} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.primary } }} component={Doctors} />
-                <Tab.Screen name={rewards} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.primary } }} component={Rewards} />
-                <Tab.Screen name={asha} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.primary } }} component={Asha} />
-                <Tab.Screen name={profile} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.primary } }} component={Profile} />
+                <Tab.Screen name={home} navigation={navigation} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.pink } }} component={Home} />
+                <Tab.Screen name={doctors} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.pink } }} component={Doctors} />
+                <Tab.Screen name={rewards} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.pink } }} component={Rewards} />
+                <Tab.Screen name={asha} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.pink } }} component={Asha} />
+                <Tab.Screen name={profile} options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.pink } }} component={Profile} />
+                {/* <Tab.Screen name="add" options={{ headerShown: false, tabBarLabelStyle: { color: COLORS.pink}, tabBarButton:()=>null}} component={AddRecords} /> */}
 
             </Tab.Navigator>
         </SafeAreaView>

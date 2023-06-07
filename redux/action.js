@@ -29,7 +29,7 @@ export const loadUser = () => async (dispatch) => {
     dispatch({ type: "loadUserRequest" });
 
     const res = await axios.get(`${serverUrl}/me`);
-    //(res.data);
+    console.log(res.data);
     dispatch({ type: "loadUserSuccess", payload: res.data });
   } catch (error) {
     dispatch({ type: "loadUserFailure", payload: error.response.data.message });
@@ -64,21 +64,20 @@ export const deleteProfile = (id) => async (dispatch) => {
   }
 };
 
-export const addProfile = (name) => async (dispatch) => {
+export const addProfile = (myform) => async (dispatch) => {
   try {
     dispatch({ type: "addProfileRequest" });
 
-    const { data } = await axios.post(
+    const  data  = await axios.post(
       `${serverUrl}/newprofile`,
-      {
-        name
-      },
+      myform,
       {
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
+    console.log(data);
     dispatch({ type: "addProfileSuccess", payload: data.message });
   } catch (error) {
     dispatch({ type: "addProfileFailure", payload: error.response.data.message });

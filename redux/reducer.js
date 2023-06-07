@@ -138,14 +138,16 @@ export const authReducer = createReducer(
       state.loading = false;
       state.error = action.payload.data;
     },
-    addTaskRequest: (state) => {
+    addProfileRequest: (state) => {
       state.loading = true;
     },
-    addTaskSuccess: (state, action) => {
+    addProfileSuccess: (state, action) => {
       state.loading = false;
+      state.nameAdd = true;
       state.message = action.payload.data;
     },
-    addTaskFailure: (state, action) => {
+    addProfileFailure: (state, action) => {
+
       state.loading = false;
       state.error = action.payload.data;
     },

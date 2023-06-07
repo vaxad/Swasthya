@@ -1,11 +1,12 @@
 const COLORS = {
   //primary: "#312651",
-  primary: "#000000",
-  btn1:"#000000",
+  primary: "#006089",
+  btn1:"#FF8B8B",
   secondary: "#444262",
   tertiary: "#FF7754",
 
-  pink: "#FFC0CB",
+  pink: "#FF8B8B",
+  blue: "#006089",
   grad: "linear-gradient(to bottom left, #33ccff 0%, #9900ff 100%)",
 
   gray: "#83829A",
