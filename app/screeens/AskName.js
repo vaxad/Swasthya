@@ -21,10 +21,12 @@ import { addProfile, addname, loadUser } from '../../redux/action';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useEffect } from 'react';
 import SelectDropdown from 'react-native-select-dropdown'
+import { StackActions } from '@react-navigation/native';
 
 var edate='Enter Date of Birth';
 
 const AskName = ({ navigation }) => {
+  const pop=StackActions.pop(3)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
@@ -79,7 +81,8 @@ let year = date.getFullYear();
     console.log(myForm)
     dispatch(addProfile(myForm));
     dispatch(loadUser());
-    navigation.goBack()
+    // navigation.goBack()
+    navigation.dispatch(pop);
     setName('');
     edate='Enter Date of Birth';
     setGender('')

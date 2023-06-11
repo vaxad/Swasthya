@@ -1,12 +1,20 @@
 import {View, Text, Image} from 'react-native';
 import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadUser } from '../../redux/action';
 
 const Splash = ({navigation}) => {
+  const dispatch=useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate('Main');
-    }, 2000);
+    dispatch(loadUser());
+    // setTimeout(() => {
+    //   navigation.navigate('Nav');
+    // }, 2000);
   }, []);
+  const {user}=useSelector(state => state.auth)
+  if(user){
+    navigation.replace('nav')
+  }
   return (
     <View>
       <Image source={require('../../assets/splash.png')}/>

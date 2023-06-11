@@ -77,12 +77,12 @@ const RegistrationScreen = ({ navigation }) => {
           dispatch(register(myForm))
           if (user) {
             
-          
               console.log("login")
         
               navigation.replace('Nav');
         
-            
+          }else{
+            navigation.replace('splash')
           }
         } catch (e) {
           console.log(e)
