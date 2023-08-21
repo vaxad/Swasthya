@@ -1,14 +1,4 @@
-# Expo Router Example
-
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
-
-## 🚀 How to use
-
-```sh
-npx create-expo-app -e with-router
-```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+1
+![swas3](https://github.com/vaxad/01_healthcare/assets/126230095/2b472744-b1d3-47fb-85ab-ae018af3877b)
+![swas2](https://github.com/vaxad/01_healthcare/assets/126230095/d1416b07-24c3-482c-9060-0744acd48400)
+![swas1](https://github.com/vaxad/01_healthcare/assets/126230095/57699200-07a4-4522-924d-0c11c7283b9a)
